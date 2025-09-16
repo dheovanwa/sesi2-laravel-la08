@@ -53,3 +53,16 @@ Route::post('/submit-contact', function (Request $request) {
     $name = $request->input('name');
     return "Received name: $name";
 });
+
+Route::get('/about', function () {
+    return view('about', ['name' => 'Anderies', 'age' => null]);
+});
+
+Route::get('/profile/{username}', function ($username) {
+    return view('profile', ['username' => $username]);
+});
+
+// 2.4 Route Fall Back => Fallback route for undefined pages
+Route::fallback(function () {
+    return response()->view('fallback', [], 404);
+});
